@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yousuf Ansari — Software Developer · Open Source Contributor</title>
+<meta name="description" content="Yousuf Ansari — Software developer from Pune, India. MSOC 2026 Intern @ Mifos, Apache Superset contributor. 19+ merged PRs in production codebases.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070d;
+  --bg-soft:#0d0d17;
+  --card:#11111d;
+  --card-hover:#161627;
+  --border:rgba(255,255,255,.08);
+  --border-bright:rgba(124,108,255,.45);
+  --text:#e8e8f2;
+  --muted:#9a9ab0;
+  --faint:#62627a;
+  --accent:#7c6cff;
+  --accent2:#00d4ff;
+  --accent3:#ff5c87;
+  --gradient:linear-gradient(100deg,#7c6cff 0%,#00d4ff 55%,#5cffc0 100%);
+  --mono:'JetBrains Mono',monospace;
+  --sans:'Inter',system-ui,sans-serif;
+  --display:'Space Grotesk',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  line-height:1.65;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:rgba(124,108,255,.4)}
+/* ambient background */
+.bg-grid{
+  position:fixed;inset:0;z-index:-2;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 75%);
+}
+.bg-glow{position:fixed;z-index:-3;border-radius:50%;filter:blur(120px);opacity:.35;pointer-events:none}
+.bg-glow.g1{width:640px;height:640px;background:#3b2d8f;top:-260px;left:-160px}
+.bg-glow.g2{width:520px;height:520px;background:#083b4d;top:12%;right:-220px}
+.bg-glow.g3{width:600px;height:600px;background:#241a5e;bottom:-280px;left:32%}
+canvas#stars{position:fixed;inset:0;z-index:-1;pointer-events:none}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+
+/* nav */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(7,7,13,.72);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s;
+}
+nav.scrolled{border-bottom-color:var(--border)}
+.nav-inner{max-width:1080px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:var(--mono);font-weight:600;font-size:15px;color:var(--text);text-decoration:none;letter-spacing:.5px}
+.logo span{color:var(--accent)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13.5px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a.cta{
+  color:#0a0a12;background:var(--gradient);padding:8px 16px;border-radius:8px;font-weight:600;
+  transition:transform .2s,box-shadow .2s;
+}
+.nav-links a.cta:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(124,108,255,.4)}
+@media(max-width:720px){.nav-links a:not(.cta){display:none}}
+
+/* hero */
+header{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:90px;position:relative}
+.status-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:12.5px;color:#5cffc0;
+  border:1px solid rgba(92,255,192,.25);background:rgba(92,255,192,.06);
+  padding:6px 14px;border-radius:99px;width:fit-content;margin-bottom:28px;
+}
+.status-pill::before{content:'';width:7px;height:7px;border-radius:50%;background:#5cffc0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(92,255,192,.5)}50%{box-shadow:0 0 0 6px rgba(92,255,192,0)}}
+h1{
+  font-family:var(--display);
+  font-size:clamp(44px,8.5vw,92px);
+  font-weight:700;line-height:1.02;letter-spacing:-2.5px;
+  margin-bottom:20px;
+}
+h1 .grad{background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{font-size:clamp(16px,2.2vw,20px);color:var(--muted);max-width:640px;margin-bottom:14px}
+.hero-sub strong{color:var(--text);font-weight:600}
+.typed-line{font-family:var(--mono);font-size:14.5px;color:var(--accent2);margin-bottom:40px;min-height:24px}
+.typed-line::after{content:'▊';animation:blink 1s step-end infinite;margin-left:2px}
+@keyframes blink{50%{opacity:0}}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:64px}
+.btn{
+  display:inline-flex;align-items:center;gap:9px;
+  padding:13px 24px;border-radius:10px;font-size:14.5px;font-weight:600;
+  text-decoration:none;transition:all .2s;border:1px solid var(--border);
+}
+.btn svg{width:17px;height:17px;fill:currentColor}
+.btn.primary{background:var(--gradient);color:#0a0a12;border:none}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(124,108,255,.45)}
+.btn.ghost{color:var(--text);background:rgba(255,255,255,.03)}
+.btn.ghost:hover{border-color:var(--border-bright);background:rgba(124,108,255,.08);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:0;flex-wrap:wrap;border-top:1px solid var(--border)}
+.hstat{padding:24px 44px 6px 0;margin-right:44px}
+.hstat .num{font-family:var(--display);font-size:38px;font-weight:700;letter-spacing:-1px;background:var(--gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hstat .lbl{font-size:12.5px;color:var(--faint);font-family:var(--mono);letter-spacing:.5px;text-transform:uppercase;margin-top:2px}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:var(--faint);font-size:22px;animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* sections */
+section{padding:110px 0}
+.sec-tag{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:1px;margin-bottom:12px}
+.sec-tag::before{content:'// '}
+h2{font-family:var(--display);font-size:clamp(30px,4.5vw,46px);font-weight:700;letter-spacing:-1.2px;margin-bottom:14px}
+.sec-desc{color:var(--muted);max-width:620px;margin-bottom:52px;font-size:16px}
+.sec-desc a{color:var(--accent2);text-decoration:none}
+.sec-desc a:hover{text-decoration:underline}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* open source cards */
+.os-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:22px}
+@media(max-width:820px){.os-grid{grid-template-columns:1fr}}
+.os-card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:30px;
+  position:relative;overflow:hidden;transition:border-color .3s,transform .3s;
+}
+.os-card:hover{border-color:var(--border-bright);transform:translateY(-3px)}
+.os-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--gradient);opacity:0;transition:opacity .3s;
+}
+.os-card:hover::before{opacity:1}
+.os-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;gap:10px;flex-wrap:wrap}
+.os-name{font-family:var(--display);font-size:21px;font-weight:600}
+.os-name a{color:var(--text);text-decoration:none}
+.os-name a:hover{color:var(--accent2)}
+.os-badge{font-family:var(--mono);font-size:11.5px;padding:4px 11px;border-radius:99px;white-space:nowrap}
+.os-badge.superset{color:#ffb85c;border:1px solid rgba(255,184,92,.3);background:rgba(255,184,92,.07)}
+.os-badge.mifos{color:#5cffc0;border:1px solid rgba(92,255,192,.3);background:rgba(92,255,192,.07)}
+.os-meta{font-family:var(--mono);font-size:12.5px;color:var(--faint);margin-bottom:16px}
+.os-desc{color:var(--muted);font-size:14.5px;margin-bottom:20px}
+.pr-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+.pr-list li{display:flex;gap:12px;align-items:baseline;font-size:14px}
+.pr-list .pr-id{font-family:var(--mono);font-size:12.5px;color:var(--accent);white-space:nowrap;text-decoration:none;border:1px solid rgba(124,108,255,.25);background:rgba(124,108,255,.07);padding:2px 9px;border-radius:6px;transition:all .2s}
+.pr-list .pr-id:hover{background:rgba(124,108,255,.2);border-color:var(--accent)}
+.pr-list .pr-txt{color:var(--muted)}
+.pr-list .pr-txt b{color:var(--text);font-weight:600}
+.pr-more{margin-top:18px;display:inline-block;font-family:var(--mono);font-size:13px;color:var(--accent2);text-decoration:none}
+.pr-more:hover{text-decoration:underline}
+
+/* experience timeline */
+.timeline{position:relative;padding-left:36px}
+.timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(to bottom,var(--accent),rgba(124,108,255,.05))}
+.titem{position:relative;padding-bottom:52px}
+.titem:last-child{padding-bottom:0}
+.titem::before{
+  content:'';position:absolute;left:-34px;top:7px;width:14px;height:14px;border-radius:50%;
+  background:var(--bg);border:3px solid var(--accent);box-shadow:0 0 16px rgba(124,108,255,.6);
+}
+.titem .t-when{font-family:var(--mono);font-size:12.5px;color:var(--accent2);margin-bottom:6px;letter-spacing:.5px}
+.titem h3{font-family:var(--display);font-size:21px;font-weight:600;margin-bottom:2px}
+.titem .t-org{color:var(--accent);font-size:14.5px;font-weight:600;margin-bottom:12px}
+.titem .t-org a{color:inherit;text-decoration:none}
+.titem .t-org a:hover{text-decoration:underline}
+.titem p{color:var(--muted);font-size:14.5px;max-width:640px}
+.titem ul{margin-top:10px;padding-left:18px;color:var(--muted);font-size:14.5px;max-width:640px}
+.titem ul li{margin-bottom:7px}
+.titem ul li::marker{color:var(--accent)}
+
+/* projects */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px}
+.proj{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;
+  display:flex;flex-direction:column;gap:14px;text-decoration:none;
+  transition:transform .3s,border-color .3s,background .3s;position:relative;
+}
+.proj:hover{transform:translateY(-5px);border-color:var(--border-bright);background:var(--card-hover)}
+.proj-top{display:flex;justify-content:space-between;align-items:center}
+.proj-top .folder{font-size:26px}
+.proj-top .arrow{color:var(--faint);transition:all .25s;font-size:18px}
+.proj:hover .arrow{color:var(--accent2);transform:translate(3px,-3px)}
+.proj h3{font-family:var(--display);font-size:19px;font-weight:600;color:var(--text)}
+.proj p{color:var(--muted);font-size:14px;flex:1}
+.proj .tags{display:flex;gap:8px;flex-wrap:wrap}
+.proj .tags span{font-family:var(--mono);font-size:11.5px;color:var(--faint);border:1px solid var(--border);padding:3px 10px;border-radius:99px}
+
+/* skills */
+.skill-groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:22px}
+.sgroup{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:26px;transition:border-color .3s}
+.sgroup:hover{border-color:var(--border-bright)}
+.sgroup h3{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--accent2);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chips span{
+  font-size:13px;color:var(--muted);border:1px solid var(--border);
+  padding:6px 13px;border-radius:8px;background:rgba(255,255,255,.02);transition:all .2s;cursor:default;
+}
+.chips span:hover{color:var(--text);border-color:var(--accent);background:rgba(124,108,255,.1);transform:translateY(-2px)}
+
+/* github live */
+.gh-band{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;padding:38px;
+  display:flex;align-items:center;gap:34px;flex-wrap:wrap;
+}
+.gh-band img{width:96px;height:96px;border-radius:50%;border:3px solid var(--accent);box-shadow:0 0 32px rgba(124,108,255,.4)}
+.gh-band .gh-info{flex:1;min-width:240px}
+.gh-band .gh-info h3{font-family:var(--display);font-size:22px;font-weight:600}
+.gh-band .gh-info .gh-handle{font-family:var(--mono);font-size:13.5px;color:var(--accent2);text-decoration:none}
+.gh-band .gh-info .gh-handle:hover{text-decoration:underline}
+.gh-band .gh-info p{color:var(--muted);font-size:14px;margin-top:8px;max-width:480px}
+.gh-nums{display:flex;gap:34px}
+.gh-nums div{text-align:center}
+.gh-nums .n{font-family:var(--display);font-size:30px;font-weight:700;color:var(--text)}
+.gh-nums .l{font-family:var(--mono);font-size:11.5px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px}
+
+/* contact */
+.contact-box{text-align:center;padding:20px 0 10px}
+.contact-box h2{margin-bottom:18px}
+.contact-box p{color:var(--muted);max-width:520px;margin:0 auto 40px}
+.contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+footer{border-top:1px solid var(--border);padding:34px 0;text-align:center;color:var(--faint);font-size:13px;font-family:var(--mono)}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--accent2)}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="bg-glow g1"></div><div class="bg-glow g2"></div><div class="bg-glow g3"></div>
+<canvas id="stars"></canvas>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#">yousuf<span>.ansari</span></a>
+    <div class="nav-links">
+      <a href="#opensource">Open Source</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact" class="cta">Get in touch</a>
+    </div>
+  </div>
+</nav>
+
+<header class="wrap">
+  <div class="status-pill">open to software developer roles</div>
+  <h1>Yousuf <span class="grad">Ansari</span></h1>
+  <p class="hero-sub"><strong>Software Developer</strong> from Pune, India — <strong>MSOC 2026 Intern @ Mifos Initiative</strong>, building fintech UX used in 40+ countries, and contributor to <strong>Apache Superset</strong> (73.5K ★).</p>
+  <div class="typed-line" id="typed"></div>
+  <div class="hero-actions">
+    <a class="btn primary" href="https://github.com/YousufFFFF" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.17c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.26 5.67.41.35.77 1.05.77 2.12v3.15c0 .3.21.67.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+      GitHub
+    </a>
+    <a class="btn ghost" id="linkedin-link" href="https://www.linkedin.com/in/mohammed-yousuf-ansari-935388342/" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
+      LinkedIn
+    </a>
+    <a class="btn ghost" href="mailto:ansariyousuf513@gmail.com">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      Email
+    </a>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="num" data-count="19" data-suffix="+">0</div><div class="lbl">Merged PRs</div></div>
+    <div class="hstat"><div class="num" data-count="15">0</div><div class="lbl">Mifos PRs Merged</div></div>
+    <div class="hstat"><div class="num" data-count="40" data-suffix="+">0</div><div class="lbl">Countries Impacted</div></div>
+    <div class="hstat"><div class="num" data-count="2">0</div><div class="lbl">Major OSS Projects</div></div>
+  </div>
+  <div class="scroll-hint">↓</div>
+</header>
+
+<section id="opensource" class="wrap">
+  <div class="reveal">
+    <div class="sec-tag">open-source impact</div>
+    <h2>Code running in production, worldwide</h2>
+    <p class="sec-desc">Not toy contributions — core feature work as an MSOC 2026 intern on a microfinance system serving institutions across 40+ countries, plus merged fixes in the rendering internals of one of the world's biggest BI platforms.</p>
+  </div>
+
+  <div class="os-grid">
+    <div class="os-card reveal">
+      <div class="os-head">
+        <div class="os-name"><a href="https://github.com/openMF/web-app" target="_blank" rel="noopener">Mifos X Web App</a></div>
+        <div class="os-badge mifos">MSOC 2026 · Intern</div>
+      </div>
+      <div class="os-meta">Feb 2026 – present · UI Product Templates · fintech in 40+ countries · 15 merged PRs</div>
+      <p class="os-desc">Building the loan product creation experience — a 7-step Angular Material stepper with hidden-defaults payload logic and human-readable review UX.</p>
+      <ul class="pr-list">
+        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3701" target="_blank" rel="noopener">#3701</a><span class="pr-txt"><b>Loan landing page</b> — first version with personal &amp; advance loan flows</span></li>
+        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3711" target="_blank" rel="noopener">#3711</a><span class="pr-txt"><b>Loan product UI</b> — improved creation UI and localization</span></li>
+        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3535" target="_blank" rel="noopener">#3535</a><span class="pr-txt"><b>Savings edit flow</b> — fixed broken application edit path</span></li>
+        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3263" target="_blank" rel="noopener">#3263</a><span class="pr-txt"><b>Date parsing</b> — compact numeric input support (<code style="font-family:var(--mono);font-size:12px">20240101</code>)</span></li>
+      </ul>
+      <a class="pr-more" href="https://github.com/openMF/web-app/pulls?q=is%3Apr+author%3AYousufFFFF" target="_blank" rel="noopener">all 15 Mifos PRs →</a>
+    </div>
+
+    <div class="os-card reveal">
+      <div class="os-head">
+        <div class="os-name"><a href="https://github.com/apache/superset" target="_blank" rel="noopener">Apache Superset</a></div>
+        <div class="os-badge superset">73.5K ★ · Contributor</div>
+      </div>
+      <div class="os-meta">Nov 2025 – present · ECharts &amp; deck.gl plugin internals</div>
+      <p class="os-desc">Fixes merged into the visualization engine — tagged <code style="font-family:var(--mono);font-size:12.5px;color:var(--accent2)">v6.0</code> and <code style="font-family:var(--mono);font-size:12.5px;color:var(--accent2)">viz:charts:echarts</code>.</p>
+      <ul class="pr-list">
+        <li><a class="pr-id" href="https://github.com/apache/superset/pull/37244" target="_blank" rel="noopener">#37244</a><span class="pr-txt"><b>WebGL freeze fix</b> — clamped &amp; auto-scaled <code style="font-family:var(--mono);font-size:12px">cellSize</code> in deck.gl contour to prevent GPU hangs</span></li>
+        <li><a class="pr-id" href="https://github.com/apache/superset/pull/37217" target="_blank" rel="noopener">#37217</a><span class="pr-txt"><b>Legend dedup</b> — killed duplicate legend entries in mixed timeseries charts</span></li>
+        <li><a class="pr-id" href="https://github.com/apache/superset/pull/36306" target="_blank" rel="noopener">#36306</a><span class="pr-txt"><b>Scroll legend</b> — stopped label collisions in horizontal ECharts layouts</span></li>
+        <li><a class="pr-id" href="https://github.com/apache/superset/pull/36264" target="_blank" rel="noopener">#36264</a><span class="pr-txt"><b>Docs</b> — clarified duplicate report delivery for Alerts &amp; Reports</span></li>
+      </ul>
+      <a class="pr-more" href="https://github.com/apache/superset/pulls?q=is%3Apr+author%3AYousufFFFF" target="_blank" rel="noopener">all Superset PRs →</a>
+    </div>
+  </div>
+
+  <div class="gh-band reveal">
+    <img id="gh-avatar" src="https://avatars.githubusercontent.com/u/141269047?v=4" alt="Yousuf Ansari GitHub avatar">
+    <div class="gh-info">
+      <h3>Live from GitHub</h3>
+      <a class="gh-handle" href="https://github.com/YousufFFFF" target="_blank" rel="noopener">@YousufFFFF</a>
+      <p id="gh-bio">Software Developer | MSOC 2026 Intern @ Mifos | Apache Superset contributor | Pune, India</p>
+    </div>
+    <div class="gh-nums">
+      <div><div class="n" id="gh-repos">13</div><div class="l">Repos</div></div>
+      <div><div class="n" id="gh-followers">5</div><div class="l">Followers</div></div>
+      <div><div class="n">37</div><div class="l">PRs Opened</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience" class="wrap">
+  <div class="reveal">
+    <div class="sec-tag">experience</div>
+    <h2>Where I've worked</h2>
+    <p class="sec-desc">Building software in a global open-source program — backed by hands-on industry data experience.</p>
+  </div>
+  <div class="timeline">
+    <div class="titem reveal">
+      <div class="t-when">MAY 2026 — AUG 2026</div>
+      <h3>Software Intern — MSOC 2026 · UI Product Templates</h3>
+      <div class="t-org"><a href="https://mifos.org" target="_blank" rel="noopener">Mifos Initiative</a></div>
+      <p>Selected as an intern for the Mifos Summer of Code, working on the UI Product Templates project for the Mifos X Web App — the Angular front-end for Apache Fineract, powering microfinance institutions in 40+ countries.</p>
+      <ul>
+        <li>Designed and shipped the loan product creation landing page: a 7-step Angular Material stepper</li>
+        <li>Implemented hidden-defaults payload logic and a human-readable review step</li>
+        <li>15 merged PRs spanning the Product Templates feature, i18n, UX fixes, dependency upgrades and validation standardization</li>
+      </ul>
+    </div>
+    <div class="titem reveal">
+      <div class="t-when">6 MONTHS</div>
+      <h3>Data Analyst <span style="font-size:12px;font-family:var(--mono);color:var(--faint);font-weight:400">— earlier experience</span></h3>
+      <div class="t-org">Inspacco</div>
+      <p>Built operational dashboards for facility-management clients — the data grounding I now bring to software development.</p>
+      <ul>
+        <li>Modeled multi-client service data and delivery tracking pipelines</li>
+        <li>Standardized schemas across inconsistent data sources</li>
+        <li>Turned messy operational data into decision-ready dashboards</li>
+      </ul>
+    </div>
+    <div class="titem reveal">
+      <div class="t-when">NOV 2025 — PRESENT</div>
+      <h3>Open Source Contributor</h3>
+      <div class="t-org"><a href="https://github.com/apache/superset" target="_blank" rel="noopener">Apache Superset</a></div>
+      <p>Contributing to ECharts and deck.gl plugin internals of the leading open-source BI platform — including a WebGL freeze fix and legend rendering corrections merged into v6.0.</p>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="wrap">
+  <div class="reveal">
+    <div class="sec-tag">projects</div>
+    <h2>Things I've built</h2>
+    <p class="sec-desc">Selected personal projects — from mobile apps to ML predictors.</p>
+  </div>
+  <div class="proj-grid">
+    <a class="proj reveal" href="https://github.com/YousufFFFF/Expense-Tracker" target="_blank" rel="noopener">
+      <div class="proj-top"><span class="folder">💸</span><span class="arrow">↗</span></div>
+      <h3>Expense Tracker</h3>
+      <p>Premium cross-platform expense tracking app for Android and iOS with a polished spending-insights UI.</p>
+      <div class="tags"><span>Flutter</span><span>Dart</span><span>Mobile</span></div>
+    </a>
+    <a class="proj reveal" href="https://github.com/YousufFFFF/Football_Match_Predictor" target="_blank" rel="noopener">
+      <div class="proj-top"><span class="folder">⚽</span><span class="arrow">↗</span></div>
+      <h3>Football Match Predictor</h3>
+      <p>ML model that predicts match outcomes from historical performance data using scikit-learn pipelines.</p>
+      <div class="tags"><span>Python</span><span>Scikit-learn</span><span>ML</span></div>
+    </a>
+    <a class="proj reveal" href="https://github.com/YousufFFFF/Catalogue-Manager" target="_blank" rel="noopener">
+      <div class="proj-top"><span class="folder">🗂️</span><span class="arrow">↗</span></div>
+      <h3>Catalogue Manager</h3>
+      <p>Service-catalogue management tool built on a canonical TSV data model with stabilized routing and a locked app entrypoint.</p>
+      <div class="tags"><span>Python</span><span>Data Modeling</span></div>
+    </a>
+    <a class="proj reveal" href="https://github.com/YousufFFFF/Blood-Donation-bank-Management-System-main" target="_blank" rel="noopener">
+      <div class="proj-top"><span class="folder">🩸</span><span class="arrow">↗</span></div>
+      <h3>Blood Bank Management System</h3>
+      <p>Full-stack system managing donors, blood inventory and emergency requests for blood banks.</p>
+      <div class="tags"><span>PHP</span><span>MySQL</span><span>Full-stack</span></div>
+    </a>
+  </div>
+</section>
+
+<section id="skills" class="wrap">
+  <div class="reveal">
+    <div class="sec-tag">skills</div>
+    <h2>Stack &amp; tools</h2>
+    <p class="sec-desc">The technologies I reach for — proven in merged production code, not just tutorials.</p>
+  </div>
+  <div class="skill-groups">
+    <div class="sgroup reveal"><h3>Languages</h3><div class="chips"><span>TypeScript</span><span>Python</span><span>JavaScript</span><span>SQL</span><span>C++</span><span>Dart</span></div></div>
+    <div class="sgroup reveal"><h3>Frontend</h3><div class="chips"><span>Angular</span><span>React</span><span>Angular Material</span><span>ECharts</span><span>deck.gl</span></div></div>
+    <div class="sgroup reveal"><h3>Data</h3><div class="chips"><span>Pandas</span><span>NumPy</span><span>Scikit-learn</span><span>Matplotlib</span><span>Superset</span></div></div>
+    <div class="sgroup reveal"><h3>Backend &amp; Infra</h3><div class="chips"><span>Node.js</span><span>PostgreSQL</span><span>Docker</span><span>Redis</span><span>Django</span></div></div>
+    <div class="sgroup reveal"><h3>ML</h3><div class="chips"><span>TensorFlow</span><span>PyTorch</span></div></div>
+  </div>
+</section>
+
+<section id="contact" class="wrap">
+  <div class="contact-box reveal">
+    <div class="sec-tag" style="text-align:center">contact</div>
+    <h2>Let's build something</h2>
+    <p>Open to <strong>software developer internships and roles</strong> — I bring frontend engineering, open-source rigor, and a data background that pays off in data-heavy products. The fastest way to reach me:</p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:ansariyousuf513@gmail.com">ansariyousuf513@gmail.com</a>
+      <a class="btn ghost" href="https://github.com/YousufFFFF" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn ghost" id="linkedin-link2" href="https://www.linkedin.com/in/mohammed-yousuf-ansari-935388342/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Designed &amp; built by Yousuf Ansari · Pune, India · <a href="https://github.com/YousufFFFF" target="_blank" rel="noopener">@YousufFFFF</a></div>
+</footer>
+
+<script>
+// nav border on scroll
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10),{passive:true});
+
+// typing effect
+const phrases=[
+  'MSOC 2026 intern @ Mifos — UI Product Templates',
+  'building fintech UX used in 40+ countries',
+  'contributing to apache/superset — ECharts & deck.gl internals',
+  'turning messy data into decision-ready dashboards',
+];
+const typedEl=document.getElementById('typed');
+let pi=0,ci=0,deleting=false;
+function type(){
+  const p=phrases[pi];
+  typedEl.textContent=p.slice(0,ci);
+  if(!deleting){
+    if(ci<p.length){ci++;setTimeout(type,38);}
+    else{deleting=true;setTimeout(type,2200);}
+  }else{
+    if(ci>0){ci--;setTimeout(type,16);}
+    else{deleting=false;pi=(pi+1)%phrases.length;setTimeout(type,300);}
+  }
+}
+type();
+
+// scroll reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// animated counters
+const cio=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  const el=e.target,target=+el.dataset.count,suffix=el.dataset.suffix||'';
+  const t0=performance.now(),dur=1400;
+  (function tick(t){
+    const k=Math.min((t-t0)/dur,1),ease=1-Math.pow(1-k,3);
+    el.textContent=Math.round(target*ease)+suffix;
+    if(k<1)requestAnimationFrame(tick);
+  })(t0);
+  cio.unobserve(el);
+}),{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+// starfield canvas
+const cv=document.getElementById('stars'),cx=cv.getContext('2d');
+let W,H,pts=[];
+function resize(){W=cv.width=innerWidth;H=cv.height=innerHeight;
+  pts=Array.from({length:Math.min(90,W/14)},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.4+.4}));
+}
+resize();addEventListener('resize',resize);
+let mouse={x:-1e4,y:-1e4};
+addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;},{passive:true});
+(function draw(){
+  cx.clearRect(0,0,W,H);
+  for(const p of pts){
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>W)p.vx*=-1;
+    if(p.y<0||p.y>H)p.vy*=-1;
+    cx.beginPath();cx.arc(p.x,p.y,p.r,0,7);cx.fillStyle='rgba(140,130,255,.5)';cx.fill();
+  }
+  for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+    const a=pts[i],b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=dx*dx+dy*dy;
+    if(d<130*130){cx.strokeStyle=`rgba(124,108,255,${.12*(1-d/16900)})`;cx.lineWidth=1;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke();}
+  }
+  for(const p of pts){
+    const dx=p.x-mouse.x,dy=p.y-mouse.y,d=dx*dx+dy*dy;
+    if(d<160*160){cx.strokeStyle=`rgba(0,212,255,${.22*(1-d/25600)})`;cx.lineWidth=1;cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(mouse.x,mouse.y);cx.stroke();}
+  }
+  requestAnimationFrame(draw);
+})();
+
+// live GitHub stats (graceful — baked-in values remain if offline)
+fetch('https://api.github.com/users/YousufFFFF').then(r=>r.ok?r.json():null).then(u=>{
+  if(!u)return;
+  document.getElementById('gh-repos').textContent=u.public_repos;
+  document.getElementById('gh-followers').textContent=u.followers;
+  if(u.avatar_url)document.getElementById('gh-avatar').src=u.avatar_url;
+}).catch(()=>{});
+</script>
+</body>
+</html>
