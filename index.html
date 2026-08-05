@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yousuf Ansari — Software Developer · Open Source Contributor</title>
-<meta name="description" content="Yousuf Ansari — Software developer from Pune, India. MSOC 2026 Intern @ Mifos, Apache Superset contributor. 19+ merged PRs in production codebases.">
+<meta name="description" content="Yousuf Ansari — Software developer from Pune, India. MSOC 2026 Intern @ Mifos, Apache Superset contributor. 26 merged PRs in production codebases.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -150,6 +150,9 @@ h2{font-family:var(--display);font-size:clamp(30px,4.5vw,46px);font-weight:700;l
 .os-badge{font-family:var(--mono);font-size:11.5px;padding:4px 11px;border-radius:99px;white-space:nowrap}
 .os-badge.superset{color:#ffb85c;border:1px solid rgba(255,184,92,.3);background:rgba(255,184,92,.07)}
 .os-badge.mifos{color:#5cffc0;border:1px solid rgba(92,255,192,.3);background:rgba(92,255,192,.07)}
+.os-badge.riscv{color:#8fa8ff;border:1px solid rgba(143,168,255,.32);background:rgba(143,168,255,.08)}
+.os-card.wide{grid-column:1/-1}
+@media(max-width:820px){.os-card.wide{grid-column:auto}}
 .os-meta{font-family:var(--mono);font-size:12.5px;color:var(--faint);margin-bottom:16px}
 .os-desc{color:var(--muted);font-size:14.5px;margin-bottom:20px}
 .pr-list{list-style:none;display:flex;flex-direction:column;gap:10px}
@@ -259,7 +262,7 @@ footer a:hover{color:var(--accent2)}
 <header class="wrap">
   <div class="status-pill">open to software developer roles</div>
   <h1>Yousuf <span class="grad">Ansari</span></h1>
-  <p class="hero-sub"><strong>Software Developer</strong> from Pune, India — <strong>MSOC 2026 Intern @ Mifos Initiative</strong>, building fintech UX used in 40+ countries, and contributor to <strong>Apache Superset</strong> (73.5K ★).</p>
+  <p class="hero-sub"><strong>Software Developer</strong> from Pune, India — <strong>MSOC 2026 Intern @ Mifos Initiative</strong>, building fintech UX used in 40+ countries, and contributor to <strong>Apache Superset</strong> (74K ★).</p>
   <div class="typed-line" id="typed"></div>
   <div class="hero-actions">
     <a class="btn primary" href="https://github.com/YousufFFFF" target="_blank" rel="noopener">
@@ -276,10 +279,10 @@ footer a:hover{color:var(--accent2)}
     </a>
   </div>
   <div class="hero-stats">
-    <div class="hstat"><div class="num" data-count="19" data-suffix="+">0</div><div class="lbl">Merged PRs</div></div>
-    <div class="hstat"><div class="num" data-count="15">0</div><div class="lbl">Mifos PRs Merged</div></div>
+    <div class="hstat"><div class="num" data-count="26">0</div><div class="lbl">Merged PRs</div></div>
+    <div class="hstat"><div class="num" data-count="20">0</div><div class="lbl">Mifos PRs Merged</div></div>
     <div class="hstat"><div class="num" data-count="40" data-suffix="+">0</div><div class="lbl">Countries Impacted</div></div>
-    <div class="hstat"><div class="num" data-count="2">0</div><div class="lbl">Major OSS Projects</div></div>
+    <div class="hstat"><div class="num" data-count="3">0</div><div class="lbl">Major OSS Orgs</div></div>
   </div>
   <div class="scroll-hint">↓</div>
 </header>
@@ -297,31 +300,44 @@ footer a:hover{color:var(--accent2)}
         <div class="os-name"><a href="https://github.com/openMF/web-app" target="_blank" rel="noopener">Mifos X Web App</a></div>
         <div class="os-badge mifos">MSOC 2026 · Intern</div>
       </div>
-      <div class="os-meta">Feb 2026 – present · UI Product Templates · fintech in 40+ countries · 15 merged PRs</div>
-      <p class="os-desc">Building the loan product creation experience — a 7-step Angular Material stepper with hidden-defaults payload logic and human-readable review UX.</p>
+      <div class="os-meta">Feb 2026 – present · UI Product Templates · fintech in 40+ countries · 20 merged PRs</div>
+      <p class="os-desc">Building the loan product creation experience — a 7-step Angular Material stepper with hidden-defaults payload logic and human-readable review UX. Now extending into theming and backend endpoints.</p>
       <ul class="pr-list">
-        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3701" target="_blank" rel="noopener">#3701</a><span class="pr-txt"><b>Loan landing page</b> — first version with personal &amp; advance loan flows</span></li>
-        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3711" target="_blank" rel="noopener">#3711</a><span class="pr-txt"><b>Loan product UI</b> — improved creation UI and localization</span></li>
-        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3535" target="_blank" rel="noopener">#3535</a><span class="pr-txt"><b>Savings edit flow</b> — fixed broken application edit path</span></li>
-        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3263" target="_blank" rel="noopener">#3263</a><span class="pr-txt"><b>Date parsing</b> — compact numeric input support (<code style="font-family:var(--mono);font-size:12px">20240101</code>)</span></li>
+        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3784" target="_blank" rel="noopener">#3784</a><span class="pr-txt"><b>Theme management</b> — tenant-level theming page for white-labelled deployments</span></li>
+        <li><a class="pr-id" href="https://github.com/openMF/selfservice-plugin/pull/184" target="_blank" rel="noopener">#184</a><span class="pr-txt"><b>Backend — tenant branding API</b> — new Fineract plugin endpoint serving branding to client apps</span></li>
+        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3764" target="_blank" rel="noopener">#3764</a><span class="pr-txt"><b>New loan products</b> — Two Wheeler, Education and Agricultural templates</span></li>
+        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3701" target="_blank" rel="noopener">#3701</a><span class="pr-txt"><b>Product Templates launch</b> — landing page with personal &amp; advance loan flows</span></li>
       </ul>
-      <a class="pr-more" href="https://github.com/openMF/web-app/pulls?q=is%3Apr+author%3AYousufFFFF" target="_blank" rel="noopener">all 15 Mifos PRs →</a>
+      <a class="pr-more" href="https://github.com/search?q=author%3AYousufFFFF+org%3AopenMF+is%3Amerged&type=pullrequests" target="_blank" rel="noopener">all 20 Mifos PRs →</a>
     </div>
 
     <div class="os-card reveal">
       <div class="os-head">
         <div class="os-name"><a href="https://github.com/apache/superset" target="_blank" rel="noopener">Apache Superset</a></div>
-        <div class="os-badge superset">73.5K ★ · Contributor</div>
+        <div class="os-badge superset">74K ★ · 5 merged PRs</div>
       </div>
       <div class="os-meta">Nov 2025 – present · ECharts &amp; deck.gl plugin internals</div>
       <p class="os-desc">Fixes merged into the visualization engine — tagged <code style="font-family:var(--mono);font-size:12.5px;color:var(--accent2)">v6.0</code> and <code style="font-family:var(--mono);font-size:12.5px;color:var(--accent2)">viz:charts:echarts</code>.</p>
       <ul class="pr-list">
+        <li><a class="pr-id" href="https://github.com/apache/superset/pull/38126" target="_blank" rel="noopener">#38126</a><span class="pr-txt"><b>Time shift handling</b> — corrected time-shift logic in Timeseries transformProps</span></li>
         <li><a class="pr-id" href="https://github.com/apache/superset/pull/37244" target="_blank" rel="noopener">#37244</a><span class="pr-txt"><b>WebGL freeze fix</b> — clamped &amp; auto-scaled <code style="font-family:var(--mono);font-size:12px">cellSize</code> in deck.gl contour to prevent GPU hangs</span></li>
         <li><a class="pr-id" href="https://github.com/apache/superset/pull/37217" target="_blank" rel="noopener">#37217</a><span class="pr-txt"><b>Legend dedup</b> — killed duplicate legend entries in mixed timeseries charts</span></li>
         <li><a class="pr-id" href="https://github.com/apache/superset/pull/36306" target="_blank" rel="noopener">#36306</a><span class="pr-txt"><b>Scroll legend</b> — stopped label collisions in horizontal ECharts layouts</span></li>
-        <li><a class="pr-id" href="https://github.com/apache/superset/pull/36264" target="_blank" rel="noopener">#36264</a><span class="pr-txt"><b>Docs</b> — clarified duplicate report delivery for Alerts &amp; Reports</span></li>
       </ul>
       <a class="pr-more" href="https://github.com/apache/superset/pulls?q=is%3Apr+author%3AYousufFFFF" target="_blank" rel="noopener">all Superset PRs →</a>
+    </div>
+
+    <div class="os-card wide reveal">
+      <div class="os-head">
+        <div class="os-name"><a href="https://github.com/riscv/riscv-unified-db" target="_blank" rel="noopener">RISC-V Unified Database</a></div>
+        <div class="os-badge riscv">RISC-V International · Contributor</div>
+      </div>
+      <div class="os-meta">Jul 2026 – present · machine-readable database of the RISC-V ISA specification</div>
+      <p class="os-desc">Contributing to the official RISC-V spec database — the source of truth that generates the ISA manuals, compliance tests and tooling used across the RISC-V ecosystem.</p>
+      <ul class="pr-list">
+        <li><a class="pr-id" href="https://github.com/riscv/riscv-unified-db/pull/2264" target="_blank" rel="noopener">#2264</a><span class="pr-txt"><b>Floating-point CSR pseudoinstructions</b> — added <code style="font-family:var(--mono);font-size:12px">fscsr</code>, <code style="font-family:var(--mono);font-size:12px">fsrm</code> and <code style="font-family:var(--mono);font-size:12px">fsflags</code> to the <code style="font-family:var(--mono);font-size:12px">csrrw</code> instruction definition</span></li>
+      </ul>
+      <a class="pr-more" href="https://github.com/riscv/riscv-unified-db/pulls?q=is%3Apr+author%3AYousufFFFF" target="_blank" rel="noopener">all RISC-V PRs →</a>
     </div>
   </div>
 
@@ -355,7 +371,7 @@ footer a:hover{color:var(--accent2)}
       <ul>
         <li>Designed and shipped the loan product creation landing page: a 7-step Angular Material stepper</li>
         <li>Implemented hidden-defaults payload logic and a human-readable review step</li>
-        <li>15 merged PRs spanning the Product Templates feature, i18n, UX fixes, dependency upgrades and validation standardization</li>
+        <li>20 merged PRs spanning the Product Templates feature, tenant theming, i18n, UX fixes and validation standardization</li>
       </ul>
     </div>
     <div class="titem reveal">
