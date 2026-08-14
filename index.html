@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yousuf Ansari — Software Developer · Open Source Contributor</title>
-<meta name="description" content="Yousuf Ansari — Software developer from Pune, India. MSOC 2026 Intern @ Mifos, Apache Superset contributor. 26 merged PRs in production codebases.">
+<meta name="description" content="Yousuf Ansari — Software developer from Pune, India. MSOC 2026 Intern @ Mifos, contributor to Apache Superset, Kubernetes SIGs and RISC-V. 33 merged PRs in production codebases.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -151,8 +151,7 @@ h2{font-family:var(--display);font-size:clamp(30px,4.5vw,46px);font-weight:700;l
 .os-badge.superset{color:#ffb85c;border:1px solid rgba(255,184,92,.3);background:rgba(255,184,92,.07)}
 .os-badge.mifos{color:#5cffc0;border:1px solid rgba(92,255,192,.3);background:rgba(92,255,192,.07)}
 .os-badge.riscv{color:#8fa8ff;border:1px solid rgba(143,168,255,.32);background:rgba(143,168,255,.08)}
-.os-card.wide{grid-column:1/-1}
-@media(max-width:820px){.os-card.wide{grid-column:auto}}
+.os-badge.k8s{color:#4fc3ff;border:1px solid rgba(79,195,255,.3);background:rgba(79,195,255,.07)}
 .os-meta{font-family:var(--mono);font-size:12.5px;color:var(--faint);margin-bottom:16px}
 .os-desc{color:var(--muted);font-size:14.5px;margin-bottom:20px}
 .pr-list{list-style:none;display:flex;flex-direction:column;gap:10px}
@@ -279,10 +278,10 @@ footer a:hover{color:var(--accent2)}
     </a>
   </div>
   <div class="hero-stats">
-    <div class="hstat"><div class="num" data-count="26">0</div><div class="lbl">Merged PRs</div></div>
-    <div class="hstat"><div class="num" data-count="20">0</div><div class="lbl">Mifos PRs Merged</div></div>
+    <div class="hstat"><div class="num" data-count="33">0</div><div class="lbl">Merged PRs</div></div>
+    <div class="hstat"><div class="num" data-count="26">0</div><div class="lbl">Mifos PRs Merged</div></div>
     <div class="hstat"><div class="num" data-count="40" data-suffix="+">0</div><div class="lbl">Countries Impacted</div></div>
-    <div class="hstat"><div class="num" data-count="3">0</div><div class="lbl">Major OSS Orgs</div></div>
+    <div class="hstat"><div class="num" data-count="4">0</div><div class="lbl">Major OSS Orgs</div></div>
   </div>
   <div class="scroll-hint">↓</div>
 </header>
@@ -291,7 +290,7 @@ footer a:hover{color:var(--accent2)}
   <div class="reveal">
     <div class="sec-tag">open-source impact</div>
     <h2>Code running in production, worldwide</h2>
-    <p class="sec-desc">Not toy contributions — core feature work as an MSOC 2026 intern on a microfinance system serving institutions across 40+ countries, plus merged fixes in the rendering internals of one of the world's biggest BI platforms.</p>
+    <p class="sec-desc">Not toy contributions — core feature work as an MSOC 2026 intern on a microfinance system serving institutions across 40+ countries, plus merged code in Apache Superset, the Kubernetes SIGs dashboard and the RISC-V specification database.</p>
   </div>
 
   <div class="os-grid">
@@ -300,15 +299,15 @@ footer a:hover{color:var(--accent2)}
         <div class="os-name"><a href="https://github.com/openMF/web-app" target="_blank" rel="noopener">Mifos X Web App</a></div>
         <div class="os-badge mifos">MSOC 2026 · Intern</div>
       </div>
-      <div class="os-meta">Feb 2026 – present · UI Product Templates · fintech in 40+ countries · 20 merged PRs</div>
-      <p class="os-desc">Building the loan product creation experience — a 7-step Angular Material stepper with hidden-defaults payload logic and human-readable review UX. Now extending into theming and backend endpoints.</p>
+      <div class="os-meta">Feb 2026 – present · UI Product Templates · fintech in 40+ countries · 26 merged PRs</div>
+      <p class="os-desc">Building the loan product creation experience — a 7-step Angular Material stepper with hidden-defaults payload logic and human-readable review UX. Now spanning loan templates, white-label theming and Fineract backend endpoints.</p>
       <ul class="pr-list">
-        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3784" target="_blank" rel="noopener">#3784</a><span class="pr-txt"><b>Theme management</b> — tenant-level theming page for white-labelled deployments</span></li>
-        <li><a class="pr-id" href="https://github.com/openMF/selfservice-plugin/pull/184" target="_blank" rel="noopener">#184</a><span class="pr-txt"><b>Backend — tenant branding API</b> — new Fineract plugin endpoint serving branding to client apps</span></li>
-        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3764" target="_blank" rel="noopener">#3764</a><span class="pr-txt"><b>New loan products</b> — Two Wheeler, Education and Agricultural templates</span></li>
+        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3830" target="_blank" rel="noopener">#3830</a><span class="pr-txt"><b>BNPL product template</b> — implemented the Buy Now Pay Later loan product</span></li>
+        <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3838" target="_blank" rel="noopener">#3838</a><span class="pr-txt"><b>Theme translation &amp; brand colours</b> — localized theme page with custom hex colour support</span></li>
+        <li><a class="pr-id" href="https://github.com/openMF/selfservice-plugin/pull/188" target="_blank" rel="noopener">#188</a><span class="pr-txt"><b>Backend — tenant theming API</b> — Fineract plugin endpoints for branding &amp; custom colours</span></li>
         <li><a class="pr-id" href="https://github.com/openMF/web-app/pull/3701" target="_blank" rel="noopener">#3701</a><span class="pr-txt"><b>Product Templates launch</b> — landing page with personal &amp; advance loan flows</span></li>
       </ul>
-      <a class="pr-more" href="https://github.com/search?q=author%3AYousufFFFF+org%3AopenMF+is%3Amerged&type=pullrequests" target="_blank" rel="noopener">all 20 Mifos PRs →</a>
+      <a class="pr-more" href="https://github.com/search?q=author%3AYousufFFFF+org%3AopenMF+is%3Amerged&type=pullrequests" target="_blank" rel="noopener">all 26 Mifos PRs →</a>
     </div>
 
     <div class="os-card reveal">
@@ -327,7 +326,20 @@ footer a:hover{color:var(--accent2)}
       <a class="pr-more" href="https://github.com/apache/superset/pulls?q=is%3Apr+author%3AYousufFFFF" target="_blank" rel="noopener">all Superset PRs →</a>
     </div>
 
-    <div class="os-card wide reveal">
+    <div class="os-card reveal">
+      <div class="os-head">
+        <div class="os-name"><a href="https://github.com/kubernetes-sigs/headlamp" target="_blank" rel="noopener">Headlamp</a></div>
+        <div class="os-badge k8s">7K ★ · Kubernetes SIGs</div>
+      </div>
+      <div class="os-meta">Aug 2026 · CNCF · extensible Kubernetes web UI</div>
+      <p class="os-desc">Contributing to the official Kubernetes SIGs dashboard — a fully-featured web UI for managing Kubernetes clusters.</p>
+      <ul class="pr-list">
+        <li><a class="pr-id" href="https://github.com/kubernetes-sigs/headlamp/pull/6844" target="_blank" rel="noopener">#6844</a><span class="pr-txt"><b>Node shell error surfacing</b> — made pod creation failures visible in NodeShellTerminal instead of failing silently</span></li>
+      </ul>
+      <a class="pr-more" href="https://github.com/kubernetes-sigs/headlamp/pulls?q=is%3Apr+author%3AYousufFFFF" target="_blank" rel="noopener">all Headlamp PRs →</a>
+    </div>
+
+    <div class="os-card reveal">
       <div class="os-head">
         <div class="os-name"><a href="https://github.com/riscv/riscv-unified-db" target="_blank" rel="noopener">RISC-V Unified Database</a></div>
         <div class="os-badge riscv">RISC-V International · Contributor</div>
@@ -371,7 +383,7 @@ footer a:hover{color:var(--accent2)}
       <ul>
         <li>Designed and shipped the loan product creation landing page: a 7-step Angular Material stepper</li>
         <li>Implemented hidden-defaults payload logic and a human-readable review step</li>
-        <li>20 merged PRs spanning the Product Templates feature, tenant theming, i18n, UX fixes and validation standardization</li>
+        <li>26 merged PRs spanning Product Templates, BNPL, tenant theming, backend endpoints, i18n and UX fixes</li>
       </ul>
     </div>
     <div class="titem reveal">
