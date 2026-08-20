@@ -183,7 +183,7 @@ h2{font-family:var(--display);font-size:clamp(30px,4.5vw,46px);font-weight:700;l
 .titem ul li::marker{color:var(--accent)}
 
 /* projects */
-.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:22px}
 .proj{
   background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;
   display:flex;flex-direction:column;gap:14px;text-decoration:none;
@@ -415,32 +415,20 @@ footer a:hover{color:var(--accent2)}
   <div class="reveal">
     <div class="sec-tag">projects</div>
     <h2>Things I've built</h2>
-    <p class="sec-desc">Selected personal projects — from mobile apps to ML predictors.</p>
+    <p class="sec-desc">Selected personal projects — developer tooling and data modeling.</p>
   </div>
   <div class="proj-grid">
-    <a class="proj reveal" href="https://github.com/YousufFFFF/Expense-Tracker" target="_blank" rel="noopener">
-      <div class="proj-top"><span class="folder">💸</span><span class="arrow">↗</span></div>
-      <h3>Expense Tracker</h3>
-      <p>Premium cross-platform expense tracking app for Android and iOS with a polished spending-insights UI.</p>
-      <div class="tags"><span>Flutter</span><span>Dart</span><span>Mobile</span></div>
-    </a>
-    <a class="proj reveal" href="https://github.com/YousufFFFF/Football_Match_Predictor" target="_blank" rel="noopener">
-      <div class="proj-top"><span class="folder">⚽</span><span class="arrow">↗</span></div>
-      <h3>Football Match Predictor</h3>
-      <p>ML model that predicts match outcomes from historical performance data using scikit-learn pipelines.</p>
-      <div class="tags"><span>Python</span><span>Scikit-learn</span><span>ML</span></div>
+    <a class="proj reveal" href="https://github.com/YousufFFFF/ForceFree" target="_blank" rel="noopener">
+      <div class="proj-top"><span class="folder">🧹</span><span class="arrow">↗</span></div>
+      <h3>ForceFree</h3>
+      <p>Rust CLI that finds the disk space your dev projects quietly eat — and ranks it by what reclaiming it will <em>cost</em> you. Sorts by rebuild time, not just size, so you delete the 4&nbsp;GB that takes 45 seconds to restore before the 400&nbsp;MB that takes ten minutes. Refuses to touch any repo with uncommitted or unpushed work — no flag overrides that.</p>
+      <div class="tags"><span>Rust</span><span>CLI</span><span>Developer Tooling</span></div>
     </a>
     <a class="proj reveal" href="https://github.com/YousufFFFF/Catalogue-Manager" target="_blank" rel="noopener">
       <div class="proj-top"><span class="folder">🗂️</span><span class="arrow">↗</span></div>
       <h3>Catalogue Manager</h3>
       <p>Service-catalogue management tool built on a canonical TSV data model with stabilized routing and a locked app entrypoint.</p>
-      <div class="tags"><span>Python</span><span>Data Modeling</span></div>
-    </a>
-    <a class="proj reveal" href="https://github.com/YousufFFFF/Blood-Donation-bank-Management-System-main" target="_blank" rel="noopener">
-      <div class="proj-top"><span class="folder">🩸</span><span class="arrow">↗</span></div>
-      <h3>Blood Bank Management System</h3>
-      <p>Full-stack system managing donors, blood inventory and emergency requests for blood banks.</p>
-      <div class="tags"><span>PHP</span><span>MySQL</span><span>Full-stack</span></div>
+      <div class="tags"><span>Python</span><span>Data Modeling</span><span>TSV</span></div>
     </a>
   </div>
 </section>
@@ -452,7 +440,7 @@ footer a:hover{color:var(--accent2)}
     <p class="sec-desc">The technologies I reach for — proven in merged production code, not just tutorials.</p>
   </div>
   <div class="skill-groups">
-    <div class="sgroup reveal"><h3>Languages</h3><div class="chips"><span>TypeScript</span><span>Python</span><span>JavaScript</span><span>SQL</span><span>C++</span><span>Dart</span></div></div>
+    <div class="sgroup reveal"><h3>Languages</h3><div class="chips"><span>TypeScript</span><span>Python</span><span>Rust</span><span>JavaScript</span><span>SQL</span><span>C++</span></div></div>
     <div class="sgroup reveal"><h3>Frontend</h3><div class="chips"><span>Angular</span><span>React</span><span>Angular Material</span><span>ECharts</span><span>deck.gl</span></div></div>
     <div class="sgroup reveal"><h3>Data</h3><div class="chips"><span>Pandas</span><span>NumPy</span><span>Scikit-learn</span><span>Matplotlib</span><span>Superset</span></div></div>
     <div class="sgroup reveal"><h3>Backend &amp; Infra</h3><div class="chips"><span>Node.js</span><span>PostgreSQL</span><span>Docker</span><span>Redis</span><span>Django</span></div></div>
