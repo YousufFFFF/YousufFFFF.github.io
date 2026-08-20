@@ -394,11 +394,14 @@ def main():
             before = fh.read()
         after = replace_block(before, "SUMMARY", summary_md)
         after = replace_block(after, "TABLES", tables_md)
-        mifos_n = len(next((g for p, g in groups if p["key"] == "mifos"), []))
+        mifos = next((g for p, g in groups if p["key"] == "mifos"), [])
         after = re.sub(r"\d+\+merged\+PRs\+in\+production\+codebases",
                        "%d+merged+PRs+in+production+codebases" % total, after)
         after = re.sub(r"\*\*\d+ merged PRs\*\* and counting",
-                       "**%d merged PRs** and counting" % mifos_n, after)
+                       "**%d merged PRs** and counting" % len(mifos), after)
+        # keep the hand-written "N loan product templates" bullet honest too
+        after = re.sub(r"\*\*\d+ loan product templates\*\*",
+                       "**%d loan product templates**" % sum(templates_in(p) for p in mifos), after)
         if after != before:
             with open(md_path, "w", encoding="utf-8", newline="\n") as fh:
                 fh.write(after)
