@@ -260,8 +260,8 @@ def render_html(groups, total, star_map):
     mifos = next((g for p, g in groups if p["key"] == "mifos"), [])
     templates = sum(templates_in(p) for p in mifos)
 
-    stats = [(total, "Merged PRs"), (len(mifos), "Mifos PRs Merged"),
-             (40, "Countries Impacted", "+"), (len(groups), "Major OSS Orgs")]
+    stats = [(total, "Merged PRs"), (40, "Countries Impacted", "+"),
+             (len(groups), "Major OSS Orgs")]
     rows = []
     for s in stats:
         suffix = ' data-suffix="%s"' % s[2] if len(s) > 2 else ""
