@@ -35,7 +35,7 @@ PROJECTS = [
               "plus white-label theming down to the Fineract backend."),
         more="https://github.com/search?q=author%3AYousufFFFF+org%3AopenMF+is%3Amerged&type=pullrequests",
         more_text="all {n} Mifos PRs →", show=4,
-        md_title="🏦 Mifos X — Merged PRs", md_top=7,
+        md_title="🏦 Mifos X — Merged PRs", md_top=7, md_icon="🏦",
     ),
     dict(
         key="superset", name="Apache Superset", repos=["apache/superset"],
@@ -47,7 +47,8 @@ PROJECTS = [
               '<code style="font-family:var(--mono);font-size:12.5px;color:var(--accent2)">viz:charts:echarts</code>.'),
         more="https://github.com/apache/superset/pulls?q=is%3Apr+author%3AYousufFFFF",
         more_text="all Superset PRs →", show=4,
-        md_title="📊 Apache Superset — Merged PRs", md_top=99,
+        md_title="📊 Apache Superset — Merged PRs", md_top=99, md_icon="📊",
+        md_summary="**Apache Superset** ({stars}) — fixes in ECharts & deck.gl rendering internals, shipped in `v6.0`",
     ),
     dict(
         key="headlamp", name="Headlamp", repos=["kubernetes-sigs/headlamp"],
@@ -58,7 +59,8 @@ PROJECTS = [
               "managing Kubernetes clusters."),
         more="https://github.com/kubernetes-sigs/headlamp/pulls?q=is%3Apr+author%3AYousufFFFF",
         more_text="all Headlamp PRs →", show=4,
-        md_title="☸️ Headlamp (Kubernetes SIGs) — Merged PRs", md_top=99,
+        md_title="☸️ Headlamp (Kubernetes SIGs) — Merged PRs", md_top=99, md_icon="☸️",
+        md_summary="**Kubernetes SIGs** — merged into Headlamp ({stars}), the CNCF Kubernetes web UI",
         md_blurb=("[Headlamp](https://github.com/kubernetes-sigs/headlamp) is the CNCF / Kubernetes SIGs web UI "
                   "for managing clusters — fully-featured, user-friendly and extensible."),
     ),
@@ -71,7 +73,8 @@ PROJECTS = [
               "ISA manuals, compliance tests and tooling used across the RISC-V ecosystem."),
         more="https://github.com/riscv/riscv-unified-db/pulls?q=is%3Apr+author%3AYousufFFFF",
         more_text="all RISC-V PRs →", show=4,
-        md_title="⚙️ RISC-V Unified Database — Merged PRs", md_top=99,
+        md_title="⚙️ RISC-V Unified Database — Merged PRs", md_top=99, md_icon="⚙️",
+        md_summary="**RISC-V International** — merged into the official machine-readable ISA specification database",
         md_blurb=("The official machine-readable database of the RISC-V ISA specification, maintained by "
                   "RISC-V International — it generates the ISA manuals, compliance tests and tooling used "
                   "across the ecosystem."),
@@ -126,8 +129,25 @@ def templates_in(pr):
         return 1
     return 0
 
-# PRs featured at the top of the README Mifos table, in this order.
-MD_FEATURED = [3874, 3866, 3863, 3856, 3840, 3830, 188]
+# Optional emoji for README table rows, keyed by PR number.
+MD_EMOJI = {
+    3878: "💳", 3874: "🛋️", 3866: "🤝", 3863: "🚗", 3856: "🥇", 3840: "🏠", 3830: "💳",
+    3838: "🎨", 3784: "🖌️", 3764: "🛵", 3701: "🚀", 188: "🔌", 184: "🔌",
+    38126: "⏱️", 37244: "🧊", 37217: "👯", 36306: "📜", 36264: "📝", 6844: "🐚", 2264: "🧮",
+}
+
+
+def anchor(heading):
+    """Reproduce GitHub's heading-anchor ids.
+
+    Emoji are dropped (leaving the space that preceded them, hence a leading
+    hyphen), but a trailing VARIATION SELECTOR-16 survives -- so "☸️ Headlamp"
+    anchors to "️-headlamp", not "-headlamp". Verified against the rendered
+    README via the GitHub API.
+    """
+    s = heading.lower()
+    s = "".join(c for c in s if c == "️" or c.isalnum() or c in " -_")
+    return s.replace(" ", "-")
 
 
 # ------------------------------------------------------------------- github --
@@ -274,7 +294,7 @@ def render_html(groups, total, star_map):
     return stats_html, "\n\n".join(cards)
 
 
-def render_md(groups, total):
+def render_md(groups, total, star_map):
     mifos = next((g for p, g in groups if p["key"] == "mifos"), [])
     templates = sum(templates_in(p) for p in mifos)
     org_word = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six"}.get(len(groups), str(len(groups)))
@@ -284,7 +304,7 @@ def render_md(groups, total):
         "|:--:|:--|:--|",
         "| 🎓 | **MSOC 2026 Intern** @ Mifos Initiative — building the **UI Product Templates** project for a "
         "fintech platform serving **40+ countries**, now a library of **%d loan product templates** | "
-        "[Merged PRs ↓](#-mifos-x--merged-prs) |" % templates,
+        "[Merged PRs ↓](#%s) |" % (templates, anchor(PROJECTS[0]["md_title"])),
         "| 🔥 | **%d merged PRs** across %s major open-source organizations | "
         "[All my PRs](https://github.com/search?q=author%%3A%s+type%%3Apr+is%%3Amerged&type=pullrequests) |"
         % (total, org_word, USER),
@@ -292,10 +312,11 @@ def render_md(groups, total):
     for proj, mine in groups:
         if proj["key"] == "mifos":
             continue
-        icon = {"superset": "📊", "headlamp": "☸️", "riscv": "⚙️"}.get(proj["key"], "🧩")
-        anchor = re.sub(r"[^a-z0-9 -]", "", proj["md_title"].lower()).strip().replace(" ", "-")
-        summary.append("| %s | **%s** — %d merged PR%s | [Merged PRs ↓](#%s) |"
-                       % (icon, proj["name"], len(mine), "" if len(mine) == 1 else "s", anchor))
+        icon = proj.get("md_icon", "🧩")
+        blurb = proj.get("md_summary", "**%s** — %d merged PR%s"
+                         % (proj["name"], len(mine), "" if len(mine) == 1 else "s"))
+        blurb = blurb.format(stars=star_map.get(proj["key"], ""), n=len(mine))
+        summary.append("| %s | %s | [Merged PRs ↓](#%s) |" % (icon, blurb, anchor(proj["md_title"])))
     summary.append("| 💼 | **Past: Data Analyst @ Inspacco** — 6 months of production dashboards, now fueling "
                    "my software work | [Details ↓](#-industry-experience) |")
 
@@ -308,17 +329,19 @@ def render_md(groups, total):
             y, m, _ = p["merged"].split("-")
             month = "%s %s" % (["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
                                "Aug", "Sep", "Oct", "Nov", "Dec"][int(m) - 1], y)
-        return "| [%s](%s) | %s | %s |" % (label, p["url"], to_md(describe(p)), month)
+        emoji = MD_EMOJI.get(p["number"])
+        text = to_md(describe(p))
+        if emoji:
+            text = "%s %s" % (emoji, text)
+        return "| [%s](%s) | %s | %s |" % (label, p["url"], text, month)
 
     tables = []
     for proj, mine in groups:
         block = ["## %s" % proj["md_title"], ""]
         if proj.get("md_blurb"):
             block += [proj["md_blurb"], ""]
-        top = [p for p in mine if p["number"] in MD_FEATURED] if proj["key"] == "mifos" else mine[: proj["md_top"]]
-        if proj["key"] == "mifos":
-            top.sort(key=lambda p: MD_FEATURED.index(p["number"]))
-        rest = [p for p in mine if p not in top]
+        top = mine[: proj["md_top"]]
+        rest = mine[proj["md_top"]:]
         block += ["| PR | What it did | Merged |", "|:--|:--|:--|"]
         block += [row(p) for p in top]
         if rest:
@@ -365,7 +388,8 @@ def main():
 
     md_path = os.path.join(root, "README.md")
     if os.path.exists(md_path):
-        summary_md, tables_md = render_md(groups, total)
+        star_map = {p["key"]: stars(p["star_repo"]) for p, _ in groups}
+        summary_md, tables_md = render_md(groups, total, star_map)
         with open(md_path, encoding="utf-8") as fh:
             before = fh.read()
         after = replace_block(before, "SUMMARY", summary_md)
