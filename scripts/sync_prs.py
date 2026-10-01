@@ -27,9 +27,9 @@ PROJECTS = [
         key="mifos", name="Mifos X Web App",
         repos=["openMF/web-app", "openMF/selfservice-plugin"],
         url="https://github.com/openMF/web-app",
-        badge_class="mifos", badge="MSOC 2026 · Intern", star_repo=None,
-        meta="Feb 2026 – present · UI Product Templates · fintech in 40+ countries · {n} merged PRs",
-        desc=("Building the loan product creation experience — a 7-step Angular Material stepper with "
+        badge_class="mifos", badge="MSOC 2026 · Intern · Completed", star_repo=None,
+        meta="May – Aug 2026 (completed) · UI Product Templates · fintech in 40+ countries · {n} merged PRs",
+        desc=("Built the loan product creation experience — a 7-step Angular Material stepper with "
               "hidden-defaults payload logic and human-readable review UX. Shipped a library of "
               "<b>{templates} loan product templates</b> — BNPL, gold, auto, JLG, home, mortgage and more — "
               "plus white-label theming down to the Fineract backend."),
@@ -302,8 +302,8 @@ def render_md(groups, total, star_map):
     summary = [
         "| 🏆 | What | Proof |",
         "|:--:|:--|:--|",
-        "| 🎓 | **MSOC 2026 Intern** @ Mifos Initiative — building the **UI Product Templates** project for a "
-        "fintech platform serving **40+ countries**, now a library of **%d loan product templates** | "
+        "| 🎓 | **MSOC 2026 Intern (completed ✅)** @ Mifos Initiative — delivered the **UI Product Templates** "
+        "project for a fintech platform serving **40+ countries**, shipping a library of **%d loan product templates** | "
         "[Merged PRs ↓](#%s) |" % (templates, anchor(PROJECTS[0]["md_title"])),
         "| 🔥 | **%d merged PRs** across %s major open-source organizations | "
         "[All my PRs](https://github.com/search?q=author%%3A%s+type%%3Apr+is%%3Amerged&type=pullrequests) |"
@@ -381,6 +381,11 @@ def main():
         after = replace_block(after, "CARDS", cards_html)
         after = re.sub(r"(\d+) merged PRs in production codebases",
                        "%d merged PRs in production codebases" % total, after)
+        # keep the hand-written internship bullet in the experience timeline honest
+        mifos = next((g for p, g in groups if p["key"] == "mifos"), [])
+        after = re.sub(r"\d+ merged PRs spanning a \d+-product loan template library",
+                       "%d merged PRs spanning a %d-product loan template library"
+                       % (len(mifos), sum(templates_in(p) for p in mifos)), after)
         if after != before:
             with open(html_path, "w", encoding="utf-8", newline="\n") as fh:
                 fh.write(after)
@@ -397,8 +402,8 @@ def main():
         mifos = next((g for p, g in groups if p["key"] == "mifos"), [])
         after = re.sub(r"\d+\+merged\+PRs\+in\+production\+codebases",
                        "%d+merged+PRs+in+production+codebases" % total, after)
-        after = re.sub(r"\*\*\d+ merged PRs\*\* and counting",
-                       "**%d merged PRs** and counting" % len(mifos), after)
+        after = re.sub(r"\*\*\d+ merged PRs\*\* across the Mifos web app",
+                       "**%d merged PRs** across the Mifos web app" % len(mifos), after)
         # keep the hand-written "N loan product templates" bullet honest too
         after = re.sub(r"\*\*\d+ loan product templates\*\*",
                        "**%d loan product templates**" % sum(templates_in(p) for p in mifos), after)
