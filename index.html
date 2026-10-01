@@ -209,14 +209,117 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer a{color:var(--muted);text-decoration:none}
 footer a:hover{color:var(--accent)}
 
-/* reveal (only when JS is running) */
-.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
-.js .reveal.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+/* ================= motion & interaction ================= */
+:root{--ease:cubic-bezier(.2,.7,.2,1);--blob-op:.16}
+:root[data-theme="dark"]{--blob-op:.22}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--blob-op:.22}}
+
+/* scroll progress */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,var(--accent),#06b6d4);z-index:60;pointer-events:none}
+
+/* nav: shadow when scrolled, hides on scroll down, scrollspy underline */
+nav{transition:border-color .2s,transform .35s var(--ease),box-shadow .2s}
+nav.scrolled{box-shadow:0 6px 24px -18px rgba(16,24,40,.35)}
+nav.hide{transform:translateY(-100%)}
+.nav-links a:not(.btn){position:relative;transition:color .2s}
+.nav-links a:not(.btn)::after{content:'';position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav-links a:not(.btn):hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.nav-links a.active{color:var(--text)}
+.logo .mark{transition:transform .4s var(--ease)}
+.logo:hover .mark{transform:rotate(-8deg) scale(1.08)}
+.theme-btn{transition:color .2s,border-color .2s,transform .2s}
+.theme-btn svg{transition:transform .5s var(--ease)}
+.theme-btn:hover svg{transform:rotate(25deg)}
+.theme-btn .sun{display:none}
+.theme-btn.is-dark .sun{display:block}
+.theme-btn.is-dark .moon{display:none}
+
+/* hero backdrop: dot grid + drifting colour blobs, parallaxed on scroll */
+header{position:relative;isolation:isolate}
+.hero-bg{position:absolute;top:-64px;bottom:-40px;left:50%;width:100vw;transform:translateX(-50%);z-index:-1;overflow:hidden;pointer-events:none}
+.hero-bg .layer{position:absolute;inset:0;will-change:transform}
+.dots{position:absolute;inset:0;background-image:radial-gradient(var(--border-strong) 1px,transparent 1px);background-size:24px 24px;-webkit-mask-image:radial-gradient(ellipse 65% 60% at 50% 35%,#000 15%,transparent 72%);mask-image:radial-gradient(ellipse 65% 60% at 50% 35%,#000 15%,transparent 72%);opacity:.7}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:var(--blob-op)}
+.blob.b1{width:440px;height:440px;background:var(--accent);top:-140px;left:4%;animation:drift1 20s ease-in-out infinite}
+.blob.b2{width:380px;height:380px;background:#06b6d4;top:60px;right:2%;animation:drift2 24s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,50px) scale(1.1)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-60px,40px) scale(.92)}}
+
+/* hero entrance */
+.js .intro{opacity:0;animation:rise .9s var(--ease) forwards;animation-delay:calc(var(--i,0) * 90ms + 80ms)}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+h1 .grad{background:linear-gradient(90deg,var(--accent),#06b6d4,var(--accent));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 6s linear infinite}
+@keyframes sheen{to{background-position:200% center}}
+.status::before{animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ok) 55%,transparent)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+/* scroll reveal with stagger (delay set per element from JS) */
+.js .reveal{transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0ms)}
+.js .reveal:not(.in){opacity:0;transform:translateY(22px)}
+.js .os-card.reveal:not(.in),.js .proj.reveal:not(.in),.js .job.reveal:not(.in){transform:translateY(28px) scale(.985)}
+/* once revealed, hand transitions back to the hover effects (no stagger delay) */
+.js .reveal.done{transition:transform .35s var(--ease),border-color .3s,box-shadow .35s var(--ease)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';width:0;height:2px;border-radius:2px;background:var(--accent);transition:width .7s var(--ease) .25s}
+.reveal.in .eyebrow::before,body:not(.js) .eyebrow::before{width:22px}
+
+/* buttons */
+.btn{position:relative;overflow:hidden}
+.btn svg{transition:transform .3s var(--ease)}
+.btn.primary::after{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.38) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s var(--ease);pointer-events:none}
+
+/* cards: lift, accent border, cursor spotlight */
+.job,.os-card,.proj,.profile,.skills{position:relative;transition:transform .35s var(--ease),border-color .3s,box-shadow .35s var(--ease)}
+.job::after,.os-card::after,.proj::after,.profile::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent) 11%,transparent),transparent 60%)}
+.job::before{content:'';position:absolute;left:0;top:18px;bottom:18px;width:3px;border-radius:0 3px 3px 0;background:var(--accent);transform:scaleY(0);transition:transform .4s var(--ease)}
+.pr-list li{padding:5px 8px;margin:0 -8px;border-radius:8px;transition:background .2s}
+.pr-list .pr-id{transition:transform .2s}
+.tags span,.chips span{transition:color .2s,border-color .2s,background .2s,transform .2s}
+.hstat{transition:background .25s}
+.hstat .num{transition:color .25s}
+.srow{transition:background .25s}
+.srow h3{transition:color .25s}
+.pr-more,.all-prs a,.proj .arrow{display:inline-block;transition:transform .25s var(--ease),color .2s}
+.job .org a{transition:color .2s,border-color .2s}
+footer a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .3s var(--ease),color .2s}
+
+@media (hover:hover){
+  .btn.primary:hover::after{transform:translateX(120%)}
+  .btn:hover svg{transform:scale(1.12) rotate(-4deg)}
+  .btn:not(.primary):hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--border));color:var(--accent)}
+  .job:hover,.os-card:hover,.proj:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 35%,var(--border));box-shadow:var(--shadow-hover)}
+  .job:hover::after,.os-card:hover::after,.proj:hover::after,.profile:hover::after{opacity:1}
+  .job:hover::before{transform:scaleY(1)}
+  .profile:hover{border-color:color-mix(in srgb,var(--accent) 35%,var(--border));box-shadow:var(--shadow-hover)}
+  .pr-list li:hover{background:var(--bg-soft)}
+  .pr-list li:hover .pr-id{transform:translateX(2px)}
+  .tags span:hover,.chips span:hover{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,var(--border));background:var(--accent-soft);transform:translateY(-2px)}
+  .hstat:hover{background:var(--bg-soft)}
+  .hstat:hover .num{color:var(--accent)}
+  .srow:hover{background:var(--bg-soft)}
+  .srow:hover h3{color:var(--accent)}
+  .pr-more:hover,.all-prs a:hover{transform:translateX(4px)}
+  .proj:hover .arrow{transform:translate(3px,-3px)}
+  footer a:hover{background-size:100% 1px}
+}
+
+/* back to top */
+.to-top{position:fixed;right:20px;bottom:20px;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--card);border:1px solid var(--border);color:var(--text);box-shadow:var(--shadow-hover);opacity:0;transform:translateY(12px) scale(.9);pointer-events:none;transition:opacity .3s,transform .3s var(--ease),color .2s,border-color .2s;z-index:55}
+.to-top.show{opacity:1;transform:none;pointer-events:auto}
+.to-top svg{width:18px;height:18px;transition:transform .25s var(--ease)}
+@media (hover:hover){.to-top:hover{color:var(--accent);border-color:var(--accent)}.to-top:hover svg{transform:translateY(-2px)}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .reveal,.js .intro{opacity:1!important;transform:none!important}
+  .eyebrow::before{width:22px}
+  html{scroll-behavior:auto}
+}
 </style>
 </head>
 <body>
 <script>document.body.classList.add('js');</script>
+<div class="progress" id="progress"></div>
 
 <nav id="nav">
   <div class="wrap nav-inner">
@@ -228,7 +331,8 @@ footer a:hover{color:var(--accent)}
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
       <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle dark mode">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
       </button>
       <a class="btn primary" href="mailto:ansariyousuf513@gmail.com">Contact me</a>
     </div>
@@ -236,13 +340,14 @@ footer a:hover{color:var(--accent)}
 </nav>
 
 <header class="wrap" id="top">
+  <div class="hero-bg" aria-hidden="true"><div class="layer" id="parallax"><span class="blob b1"></span><span class="blob b2"></span><div class="dots"></div></div></div>
   <div class="hero">
     <div>
-      <div class="status">Open to software developer roles</div>
-      <h1>Yousuf Ansari</h1>
-      <div class="role">Software Developer · Frontend &amp; Full-Stack</div>
-      <p class="pitch">I build production software in large open-source codebases. I recently <strong>completed the Mifos Summer of Code 2026 internship</strong>, shipping the loan product creation experience for a fintech platform used in 40+ countries, and I have merged code in <strong>Apache Superset</strong>, <strong>Kubernetes SIGs</strong> and <strong>RISC-V International</strong>.</p>
-      <div class="cta-row">
+      <div class="status intro" style="--i:0">Open to software developer roles</div>
+      <h1 class="intro" style="--i:1">Yousuf <span class="grad">Ansari</span></h1>
+      <div class="role intro" style="--i:2">Software Developer · Frontend &amp; Full-Stack</div>
+      <p class="pitch intro" style="--i:3">I build production software in large open-source codebases. I recently <strong>completed the Mifos Summer of Code 2026 internship</strong>, shipping the loan product creation experience for a fintech platform used in 40+ countries, and I have merged code in <strong>Apache Superset</strong>, <strong>Kubernetes SIGs</strong> and <strong>RISC-V International</strong>.</p>
+      <div class="cta-row intro" style="--i:4">
         <a class="btn primary" href="mailto:ansariyousuf513@gmail.com">
           <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5-8-5V6l8 5 8-5v2.2z"/></svg>
           Email me
@@ -257,7 +362,7 @@ footer a:hover{color:var(--accent)}
         </a>
       </div>
     </div>
-    <aside class="profile">
+    <aside class="profile intro" style="--i:3" id="profile">
       <div class="profile-top">
         <img id="gh-avatar" src="https://avatars.githubusercontent.com/u/141269047?v=4" alt="Yousuf Ansari">
         <div><b>Mohammed Yousuf Ansari</b><span>@YousufFFFF</span></div>
@@ -503,29 +608,104 @@ footer a:hover{color:var(--accent)}
   <div class="wrap"><span>© Yousuf Ansari · Pune, India</span><a href="https://github.com/YousufFFFF" target="_blank" rel="noopener">github.com/YousufFFFF</a></div>
 </footer>
 
-<script>
-// nav border on scroll
-const nav=document.getElementById('nav');
-addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>8),{passive:true});
+<a class="to-top" id="to-top" href="#top" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></a>
 
-// theme toggle
-document.getElementById('theme-btn').addEventListener('click',()=>{
-  const root=document.documentElement;
-  const dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
-  root.dataset.theme=dark?'light':'dark';
+<script>
+const root=document.documentElement;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer=matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+// ---- theme toggle (icon follows the effective theme) ----
+const themeBtn=document.getElementById('theme-btn');
+const sysDark=matchMedia('(prefers-color-scheme: dark)');
+const isDark=()=>root.dataset.theme?root.dataset.theme==='dark':sysDark.matches;
+const syncIcon=()=>themeBtn.classList.toggle('is-dark',isDark());
+syncIcon();sysDark.addEventListener('change',syncIcon);
+themeBtn.addEventListener('click',()=>{
+  root.dataset.theme=isDark()?'light':'dark';
   try{localStorage.setItem('theme',root.dataset.theme);}catch(e){}
+  syncIcon();
 });
 
-// stat numbers (the sync script writes the target into data-count)
-document.querySelectorAll('[data-count]').forEach(el=>{el.textContent=el.dataset.count+(el.dataset.suffix||'');});
+// ---- scroll: progress bar, nav state, back-to-top, hero parallax ----
+const nav=document.getElementById('nav'),bar=document.getElementById('progress'),
+      toTop=document.getElementById('to-top'),para=document.getElementById('parallax');
+let lastY=scrollY,ticking=false;
+function onScroll(){
+  const y=scrollY,max=document.documentElement.scrollHeight-innerHeight;
+  bar.style.transform='scaleX('+(max>0?y/max:0)+')';
+  nav.classList.toggle('scrolled',y>8);
+  nav.classList.toggle('hide',y>lastY&&y>480&&!reduce);
+  toTop.classList.toggle('show',y>700);
+  if(!reduce&&y<innerHeight*1.2)para.style.transform='translate3d(0,'+(y*.35)+'px,0)';
+  lastY=y;ticking=false;
+}
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(onScroll);}},{passive:true});
+onScroll();
+// show the nav again when someone moves toward it
+addEventListener('mousemove',e=>{if(e.clientY<70)nav.classList.remove('hide');},{passive:true});
 
-// scroll reveal
+// ---- scrollspy: highlight the section in view ----
+const links=[...document.querySelectorAll('.nav-links a[href^="#"]:not(.btn)')];
+const spy=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting)links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+e.target.id));
+}),{rootMargin:'-45% 0px -50% 0px'});
+links.forEach(l=>{const s=document.querySelector(l.getAttribute('href'));if(s)spy.observe(s);});
+
+// ---- stat counters (the sync script writes the target into data-count) ----
+function count(el){
+  const target=+el.dataset.count,suffix=el.dataset.suffix||'';
+  if(reduce){el.textContent=target+suffix;return;}
+  const t0=performance.now(),dur=1500;
+  (function tick(t){
+    const k=Math.min((t-t0)/dur,1),ease=1-Math.pow(1-k,4);
+    el.textContent=Math.round(target*ease)+suffix;
+    if(k<1)requestAnimationFrame(tick);
+  })(t0);
+}
+
+// ---- staggered scroll reveal ----
+document.querySelectorAll('.reveal').forEach(el=>{
+  const sibs=[...el.parentElement.children].filter(c=>c.classList.contains('reveal'));
+  el.style.setProperty('--d',Math.min(sibs.indexOf(el),5)*90+'ms');
+});
 if('IntersectionObserver' in window){
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.08});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target;el.classList.add('in');
+    setTimeout(()=>el.classList.add('done'),800+(parseInt(el.style.getPropertyValue('--d'))||0));
+    e.target.querySelectorAll('[data-count]').forEach(count);
+    io.unobserve(e.target);
+  }),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-}else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));}
+}else{
+  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));
+  document.querySelectorAll('[data-count]').forEach(count);
+}
 
-// keep the avatar current
+// ---- drop the entrance animation once it has played, so hover/tilt can take over ----
+document.querySelectorAll('.intro').forEach(el=>el.addEventListener('animationend',e=>{
+  if(e.target===el)el.classList.remove('intro');
+}));
+
+// ---- cursor spotlight on cards + gentle tilt on the profile card ----
+if(finePointer&&!reduce){
+  document.addEventListener('pointermove',e=>{
+    const card=e.target.closest('.job,.os-card,.proj,.profile');
+    if(!card)return;
+    const r=card.getBoundingClientRect();
+    card.style.setProperty('--mx',(e.clientX-r.left)+'px');
+    card.style.setProperty('--my',(e.clientY-r.top)+'px');
+  },{passive:true});
+  const prof=document.getElementById('profile');
+  prof.addEventListener('pointermove',e=>{
+    const r=prof.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    prof.style.transform='perspective(900px) rotateX('+(-y*6)+'deg) rotateY('+(x*6)+'deg) translateY(-3px)';
+  });
+  prof.addEventListener('pointerleave',()=>{prof.style.transform='';});
+}
+
+// ---- keep the avatar current ----
 fetch('https://api.github.com/users/YousufFFFF').then(r=>r.ok?r.json():null).then(u=>{
   if(u&&u.avatar_url)document.getElementById('gh-avatar').src=u.avatar_url;
 }).catch(()=>{});
