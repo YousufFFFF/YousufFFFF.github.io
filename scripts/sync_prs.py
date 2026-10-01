@@ -38,6 +38,20 @@ PROJECTS = [
         md_title="Mifos X Web App", md_top=7,
     ),
     dict(
+        key="tenantmgmt", name="Mifos X Tenant Management Plugin",
+        repos=["openMF/mifos-x-tenantmanagement-plugin"],
+        url="https://github.com/openMF/mifos-x-tenantmanagement-plugin",
+        badge_class="mifos", badge="Mifos Initiative · {n} merged PRs", star_repo=None,
+        meta="Sep 2026 – present · Java 25 · Spring Boot 4.1 · Apache Fineract",
+        desc=("Built the foundation of the tenant management plugin for Apache Fineract — Maven build and CI, "
+              "super-master security, tenant provisioning, lifecycle actions and an administration audit trail."),
+        more="https://github.com/openMF/mifos-x-tenantmanagement-plugin/pulls?q=is%3Apr+author%3AYousufFFFF",
+        more_text="all tenant management PRs →", show=4,
+        md_title="Mifos X Tenant Management Plugin", md_top=99,
+        md_label="**Mifos X Tenant Management Plugin**",
+        md_detail="Java / Spring Boot plugin for Apache Fineract — security, tenant provisioning and lifecycle",
+    ),
+    dict(
         key="superset", name="Apache Superset", repos=["apache/superset"],
         url="https://github.com/apache/superset",
         badge_class="superset", badge="{stars} · {n} merged PRs", star_repo="apache/superset",
@@ -251,12 +265,17 @@ def replace_block(text, name, body):
 
 
 # ------------------------------------------------------------------- render --
+def org_count(groups):
+    """Distinct GitHub owners across all projects (openMF counts once)."""
+    return len({r.split("/")[0].lower() for proj, _ in groups for r in proj["repos"]})
+
+
 def render_html(groups, total, star_map):
     mifos = next((g for p, g in groups if p["key"] == "mifos"), [])
     templates = sum(templates_in(p) for p in mifos)
 
     stats = [(total, "Merged PRs"), (40, "Countries Impacted", "+"),
-             (len(groups), "Major OSS Orgs")]
+             (org_count(groups), "Open-Source Orgs")]
     rows = []
     for s in stats:
         suffix = ' data-suffix="%s"' % s[2] if len(s) > 2 else ""
@@ -292,7 +311,7 @@ def render_html(groups, total, star_map):
 def render_md(groups, total, star_map):
     mifos = next((g for p, g in groups if p["key"] == "mifos"), [])
     templates = sum(templates_in(p) for p in mifos)
-    org_word = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six"}.get(len(groups), str(len(groups)))
+    org_word = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six"}.get(org_count(groups), str(org_count(groups)))
 
     summary = [
         "| Highlight | Details |",
