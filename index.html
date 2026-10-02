@@ -209,6 +209,64 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer a{color:var(--muted);text-decoration:none}
 footer a:hover{color:var(--accent)}
 
+/* ================= contribution skyline (skyline.js) ================= */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skyline{--sk-muted:var(--faint);--sk-ease:cubic-bezier(.65,0,.35,1);background:var(--card);color:var(--text);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.sk-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-bottom:12px}
+.sk-title{font-size:15px;font-weight:400;line-height:1.4}
+.sk-title b{font-weight:600;font-variant-numeric:tabular-nums}
+.sk-toggle{position:relative;display:inline-flex;border:1px solid var(--border);border-radius:8px;padding:2px}
+.sk-thumb{position:absolute;top:2px;bottom:2px;left:2px;width:32px;border-radius:6px;background:var(--text);transition:transform .5s var(--sk-ease)}
+.is-3d .sk-thumb{transform:translateX(100%)}
+.sk-toggle button{position:relative;z-index:1;display:grid;place-items:center;width:32px;height:28px;border:0;padding:0;background:transparent;border-radius:6px;cursor:pointer;color:var(--sk-muted);transition:color .5s}
+.sk-toggle button[aria-pressed="true"]{color:var(--bg)}
+.sk-toggle button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+.sk-toggle svg{width:14px;height:14px}
+.sk-box{border:1px solid var(--border);border-radius:12px}
+.sk-stage-wrap{position:relative;padding:16px 16px 0}
+.sk-stage{position:relative;width:100%;height:150px;overflow:hidden;border-radius:8px}
+.sk-stage:has(:focus-visible){outline:2px solid var(--text);outline-offset:4px}
+.sk-canvas{position:absolute;top:0;left:0;display:block;outline:none;max-width:none}
+.sk-corner{position:absolute;display:flex;flex-direction:column;gap:20px;pointer-events:none;opacity:0;transition:opacity .3s var(--sk-ease),transform .3s var(--sk-ease)}
+.sk-corner.tr{top:4px;right:4px;align-items:flex-end;transform:translateY(-10px)}
+.sk-corner.bl{bottom:4px;left:4px;align-items:flex-start;transform:translateY(10px)}
+.skyline:not(.has-corners) .sk-corner{display:none}
+.has-corners.is-3d .sk-corner{opacity:1;transform:none;transition-duration:.6s}
+.has-corners.is-3d .sk-corner.tr{transition-delay:calc(var(--sk-dur,1300ms) * .55)}
+.has-corners.is-3d .sk-corner.bl{transition-delay:calc(var(--sk-dur,1300ms) * .65)}
+.st{display:grid;grid-template-columns:auto auto;column-gap:8px;align-items:end}
+.st-label{grid-row:1;font-size:13px;line-height:1.25;color:var(--sk-muted)}
+.st.end .st-label{grid-column:1;text-align:right}
+.st.start .st-label{grid-column:1 / span 2}
+.st-value{grid-row:2;grid-column:1;font-weight:600;font-variant-numeric:tabular-nums;color:var(--sk-accent,#26a641);font-size:var(--sk-big,44px);line-height:.95;letter-spacing:-.02em;text-align:right;transition:color .5s}
+.st-meta{grid-row:2;grid-column:2;padding-bottom:.15em;line-height:1.25}
+.st-unit{font-size:15px}
+.st-sub{font-size:13px;color:var(--sk-muted);white-space:nowrap}
+.st.stack{display:block;min-width:0}
+.st.stack .st-line{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:6px;margin-top:4px;min-width:0}
+.st.stack .st-value{font-size:28px;line-height:1;text-align:left}
+.st.stack .st-unit{font-size:14px}
+.st.stack .st-sub{font-size:12px;margin-top:2px;overflow:hidden;text-overflow:ellipsis}
+.sk-row{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows var(--sk-dur,1300ms) var(--sk-ease),opacity var(--sk-dur,1300ms) var(--sk-ease)}
+.show-row .sk-row{grid-template-rows:1fr;opacity:1}
+.sk-row > div{min-height:0;overflow:hidden}
+.sk-row-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding:16px 16px 4px}
+@media(min-width:768px){.sk-row-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.sk-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:12px 16px;font-size:12px;color:var(--sk-muted)}
+.sk-hint{display:grid;flex:1}
+.sk-hint span{grid-area:1/1;transition:opacity .5s}
+.sk-hint .h3d,.is-3d .sk-hint .h2d{opacity:0}
+.is-3d .sk-hint .h3d{opacity:1}
+.sk-legend{display:flex;align-items:center;gap:6px}
+.sk-swatch{width:11px;height:11px;border-radius:2px;border:0;padding:0;cursor:pointer;background:var(--border);box-shadow:inset 0 0 0 1px rgba(127,127,127,.12);transition:background-color .5s,transform .2s}
+.sk-swatch:hover{transform:scale(1.25)}
+.sk-swatch:focus-visible{outline:2px solid var(--text);outline-offset:1px}
+.sk-tip{position:absolute;top:16px;left:16px;z-index:20;white-space:nowrap;border-radius:6px;padding:6px 10px;font-size:12px;line-height:1;background:var(--text);color:var(--bg);box-shadow:0 8px 24px -8px rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:opacity .15s}
+.sk-tip strong{font-weight:600}
+.sk-tip-date{opacity:.75}
+.sk-arrow{position:absolute;top:100%;left:var(--arrow,50%);margin-left:-5px;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid var(--text)}
+@media(max-width:600px){.skyline{padding:16px}.sk-stage-wrap{padding:12px 12px 0}.sk-tip{top:12px;left:12px}.sk-foot{padding:12px}.sk-row-grid{padding:16px 12px 4px}}
+
 /* ================= motion & interaction ================= */
 :root{--ease:cubic-bezier(.2,.7,.2,1);--blob-op:.16}
 :root[data-theme="dark"]{--blob-op:.22}
@@ -327,6 +385,7 @@ footer a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-r
     <div class="nav-links">
       <a href="#experience">Experience</a>
       <a href="#opensource">Open Source</a>
+      <a href="#activity">Activity</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
@@ -532,6 +591,40 @@ footer a{background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-r
   <p class="all-prs reveal">See every merged pull request on <a href="https://github.com/search?q=author%3AYousufFFFF+type%3Apr+is%3Amerged&type=pullrequests" target="_blank" rel="noopener">GitHub →</a></p>
 </section>
 
+<section id="activity" class="wrap">
+  <div class="reveal">
+    <div class="eyebrow">Activity</div>
+    <h2>A year of contributions</h2>
+    <p class="sec-desc">My GitHub contribution calendar as a 3D skyline, refreshed automatically. Hover a day for its count, switch between the heat map and the skyline, or drag to orbit.</p>
+  </div>
+  <div class="skyline is-3d reveal" id="skyline">
+    <header class="sk-head">
+      <h3 class="sk-title"><b class="sk-total">—</b> <span class="sk-total-noun">contributions</span> in the last year</h3>
+      <div class="sk-toggle" role="group" aria-label="Chart view">
+        <span class="sk-thumb" aria-hidden="true"></span>
+        <button type="button" data-view="2d" aria-pressed="false" aria-label="Flat heat map" title="Flat heat map"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="1.5" width="5.5" height="5.5" rx="1" fill="currentColor"/><rect x="9" y="1.5" width="5.5" height="5.5" rx="1" fill="currentColor"/><rect x="1.5" y="9" width="5.5" height="5.5" rx="1" fill="currentColor"/><rect x="9" y="9" width="5.5" height="5.5" rx="1" fill="currentColor"/></svg></button>
+        <button type="button" data-view="3d" aria-pressed="true" aria-label="3D skyline" title="3D skyline"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.2 14.2 4.6v6.8L8 14.8 1.8 11.4V4.6Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M1.8 4.6 8 8l6.2-3.4M8 8v6.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></button>
+      </div>
+    </header>
+    <div class="sk-box">
+      <div class="sk-stage-wrap">
+        <div class="sk-stage">
+          <canvas class="sk-canvas" tabindex="0" role="img" aria-label="Contribution skyline"></canvas>
+          <div class="sk-corner tr" aria-hidden="false"><div class="st end" data-stat="0"><div class="st-label"></div><div class="st-value"></div><div class="st-meta"><div class="st-unit"></div><div class="st-sub"></div></div></div><div class="st end" data-stat="1"><div class="st-label"></div><div class="st-value"></div><div class="st-meta"><div class="st-unit"></div><div class="st-sub"></div></div></div></div>
+          <div class="sk-corner bl" aria-hidden="false"><div class="st start" data-stat="2"><div class="st-label"></div><div class="st-value"></div><div class="st-meta"><div class="st-unit"></div><div class="st-sub"></div></div></div><div class="st start" data-stat="3"><div class="st-label"></div><div class="st-value"></div><div class="st-meta"><div class="st-unit"></div><div class="st-sub"></div></div></div></div>
+        </div>
+        <div class="sk-tip" role="tooltip" aria-hidden="true"><strong></strong><span class="sk-tip-date"></span><span class="sk-arrow" aria-hidden="true"></span></div>
+      </div>
+      <div class="sk-row"><div><div class="sk-row-grid"><div class="st stack" data-stat="0"><div class="st-label"></div><div class="st-line"><span class="st-value"></span><span class="st-unit"></span></div><div class="st-sub"></div></div><div class="st stack" data-stat="1"><div class="st-label"></div><div class="st-line"><span class="st-value"></span><span class="st-unit"></span></div><div class="st-sub"></div></div><div class="st stack" data-stat="2"><div class="st-label"></div><div class="st-line"><span class="st-value"></span><span class="st-unit"></span></div><div class="st-sub"></div></div><div class="st stack" data-stat="3"><div class="st-label"></div><div class="st-line"><span class="st-value"></span><span class="st-unit"></span></div><div class="st-sub"></div></div></div></div></div>
+      <div class="sk-foot">
+        <span class="sk-hint"><span class="h2d">Hover a day for details · arrow keys to explore</span><span class="h3d">Drag to orbit · double-click to reset</span></span>
+        <div class="sk-legend"><span>Less</span><button type="button" class="sk-swatch" aria-pressed="false"></button><button type="button" class="sk-swatch" aria-pressed="false"></button><button type="button" class="sk-swatch" aria-pressed="false"></button><button type="button" class="sk-swatch" aria-pressed="false"></button><button type="button" class="sk-swatch" aria-pressed="false"></button><span>More</span></div>
+      </div>
+    </div>
+    <p class="sk-live sr-only" aria-live="polite"></p>
+  </div>
+</section>
+
 <section id="projects" class="wrap">
   <div class="reveal">
     <div class="eyebrow">Projects</div>
@@ -710,5 +803,6 @@ fetch('https://api.github.com/users/YousufFFFF').then(r=>r.ok?r.json():null).the
   if(u&&u.avatar_url)document.getElementById('gh-avatar').src=u.avatar_url;
 }).catch(()=>{});
 </script>
+<script src="skyline.js" defer></script>
 </body>
 </html>

@@ -29,6 +29,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/sync_prs.py
 
+      - name: Export contribution calendar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/skyline.py --json contributions.json
+
       - name: Commit if anything changed
         run: |
           if [ -z "$(git status --porcelain)" ]; then
@@ -38,5 +43,5 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "chore: sync merged PRs [skip ci]"
+          git commit -m "chore: sync merged PRs and contributions [skip ci]"
           git push
