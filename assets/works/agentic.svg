@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1450 1000" width="1450" height="1000">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a0a2e"/><stop offset="1" stop-color="#a21caf"/></linearGradient>
+<radialGradient id="glow" cx=".78" cy=".3" r=".6"><stop offset="0" stop-color="#f0abfc" stop-opacity=".55"/><stop offset="1" stop-color="#f0abfc" stop-opacity="0"/></radialGradient>
+<pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.4" fill="#fff" opacity=".07"/></pattern>
+</defs>
+<rect width="1450" height="1000" fill="url(#bg)"/>
+<rect width="1450" height="1000" fill="url(#dots)"/>
+<rect width="1450" height="1000" fill="url(#glow)"/>
+<g stroke="#f5d0fe" stroke-opacity=".5" stroke-width="3" fill="none"><line x1="1040" y1="440" x2="850" y2="300"/><line x1="1040" y1="440" x2="1240" y2="290"/><line x1="1040" y1="440" x2="1290" y2="520"/><line x1="1040" y1="440" x2="1130" y2="650"/><line x1="1040" y1="440" x2="870" y2="600"/></g>
+<g stroke="#f5d0fe" stroke-opacity=".22" stroke-width="2" fill="none" stroke-dasharray="6 10"><path d="M850 300 L1240 290 L1290 520 L1130 650 L870 600 Z"/></g>
+<g fill="#fff" fill-opacity=".14" stroke="#f5d0fe" stroke-opacity=".7" stroke-width="3"><rect x="790" y="258" width="120" height="84" rx="18"/><rect x="1180" y="248" width="120" height="84" rx="18"/><rect x="1230" y="478" width="120" height="84" rx="18"/><rect x="1070" y="608" width="120" height="84" rx="18"/><rect x="810" y="558" width="120" height="84" rx="18"/></g>
+<g fill="#fff" fill-opacity=".6"><rect x="814" y="284" width="72" height="10" rx="5"/><rect x="814" y="306" width="46" height="10" rx="5"/><rect x="1204" y="274" width="72" height="10" rx="5"/><rect x="1204" y="296" width="46" height="10" rx="5"/><rect x="1254" y="504" width="72" height="10" rx="5"/><rect x="1254" y="526" width="46" height="10" rx="5"/><rect x="1094" y="634" width="72" height="10" rx="5"/><rect x="1094" y="656" width="46" height="10" rx="5"/><rect x="834" y="584" width="72" height="10" rx="5"/><rect x="834" y="606" width="46" height="10" rx="5"/></g>
+<circle cx="1040" cy="440" r="64" fill="#fff" fill-opacity=".2" stroke="#f5d0fe" stroke-width="4"/><circle cx="1040" cy="440" r="26" fill="#f5d0fe"/>
+<text x="96" y="120" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="30" letter-spacing="3" fill="#fff" opacity=".72">OPENMF / MCP-MIFOSX</text>
+<text x="96" y="758" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="84" font-weight="700" letter-spacing="-2" fill="#fff"><tspan x="96" dy="0">Agentic</tspan><tspan x="96" dy="92">banking</tspan></text>
+<text x="96" y="912" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="28" fill="#fff" opacity=".6">MCP · OpenFn · Apache Fineract</text>
+</svg>

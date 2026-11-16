@@ -38,6 +38,20 @@ PROJECTS = [
         md_title="Mifos X Web App", md_top=7,
     ),
     dict(
+        key="agentic", name="Mifos Agentic Banking", repos=["openMF/mcp-mifosx"],
+        url="https://github.com/openMF/mcp-mifosx",
+        badge_class="mifos", badge="Mifos Initiative · {n} merged PRs", star_repo=None,
+        meta="Oct 2026 – present · MCP · OpenFn · Ollama · Apache Fineract",
+        desc=("Building the agentic loan origination sandbox for Mifos X — OpenFn workflows and AI agents, "
+              "each with its own MCP server and Fineract service user, that take a loan from intake and "
+              "eligibility through an evidence-gated decision to write-back in Apache Fineract."),
+        more="https://github.com/openMF/mcp-mifosx/pulls?q=is%3Apr+author%3AYousufFFFF",
+        more_text="all {n} agentic banking PRs →", show=4,
+        md_title="Mifos Agentic Banking", md_top=7,
+        md_label="**Mifos Agentic Banking**",
+        md_detail="AI-agent loan origination sandbox — MCP servers, OpenFn workflows and Apache Fineract write-back",
+    ),
+    dict(
         key="tenantmgmt", name="Mifos X Tenant Management Plugin",
         repos=["openMF/mifos-x-tenantmanagement-plugin"],
         url="https://github.com/openMF/mifos-x-tenantmanagement-plugin",
@@ -96,6 +110,39 @@ PROJECTS = [
                   "RISC-V International — it generates the ISA manuals, compliance tests and tooling used "
                   "across the ecosystem."),
     ),
+    dict(
+        key="mifosreact", name="Mifos X Web App (React)", repos=["openMF/mifos-x-web-app-react"],
+        url="https://github.com/openMF/mifos-x-web-app-react",
+        badge_class="mifos", badge="Mifos Initiative · Contributor", star_repo=None,
+        meta="Oct 2026 – present · React · TypeScript",
+        desc=("Contributing to the React rewrite of the Mifos X web app — the community's go-forward "
+              "front end for Apache Fineract."),
+        more="https://github.com/openMF/mifos-x-web-app-react/pulls?q=is%3Apr+author%3AYousufFFFF",
+        more_text="all React web app PRs →", show=4,
+        md_title="Mifos X Web App (React)", md_top=99,
+    ),
+    dict(
+        key="onlinebanking", name="Mifos Online Banking", repos=["openMF/online-banking"],
+        url="https://github.com/openMF/online-banking",
+        badge_class="mifos", badge="Mifos Initiative · Contributor", star_repo=None,
+        meta="Nov 2026 – present · self-service banking",
+        desc=("Contributing to the Mifos online banking app — self-service features for end customers "
+              "on top of Apache Fineract."),
+        more="https://github.com/openMF/online-banking/pulls?q=is%3Apr+author%3AYousufFFFF",
+        more_text="all online banking PRs →", show=4,
+        md_title="Mifos Online Banking", md_top=99,
+    ),
+    dict(
+        key="zowe", name="Zowe Explorer for VS Code", repos=["zowe/zowe-explorer-vscode"],
+        url="https://github.com/zowe/zowe-explorer-vscode",
+        badge_class="riscv", badge="Open Mainframe Project · Contributor", star_repo=None,
+        meta="Oct 2026 – present · TypeScript · VS Code extension",
+        desc=("Contributing to Zowe Explorer, the Open Mainframe Project's VS Code extension for working "
+              "with z/OS data sets, USS files and jobs."),
+        more="https://github.com/zowe/zowe-explorer-vscode/pulls?q=is%3Apr+author%3AYousufFFFF",
+        more_text="all Zowe Explorer PRs →", show=4,
+        md_title="Zowe Explorer for VS Code", md_top=99,
+    ),
 ]
 
 # Curated one-liners keyed by PR number. A PR without one falls back to its
@@ -132,7 +179,7 @@ HIGHLIGHTS = {
 # Loan product templates. Titles like "Implement the gold loan product template"
 # are detected automatically, so newly shipped templates count themselves; this
 # map only overrides PRs that shipped several at once (or whose title is vaguer).
-TEMPLATE_PRS = {3701: 2, 3764: 3, 3840: 2}
+TEMPLATE_PRS = {3701: 2, 3764: 3, 3840: 2, 3884: 1}  # 3884: "Loan vs Securities / FD product template"
 TEMPLATE_RE = re.compile(r"\b(implement|add)\b.*\bloan product", re.I)
 NOT_TEMPLATE_RE = re.compile(r"creation|wizard|localization", re.I)
 
